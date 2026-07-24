@@ -1,5 +1,5 @@
 packages:
-  - 'packages/core'
+  - 'packages/function-swap'
   - 'packages/__tests__/project1'
   - 'packages/utils/vitest'
 

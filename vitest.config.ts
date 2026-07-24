@@ -17,7 +17,7 @@ export default defineConfig({
     },
 
     projects: [
-      'packages/core/vitest.config.ts',
+      'packages/function-swap/vitest.config.ts',
       'packages/__tests__/project1/vitest.config.ts',
     ],
   },
