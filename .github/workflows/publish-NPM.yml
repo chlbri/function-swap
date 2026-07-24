@@ -8,7 +8,7 @@ on:
       - master
 
 jobs:
-  app:
+  function-swap:
     uses: chlbri/node-github-actions/.github/workflows/publish.yml@main
     secrets: inherit
     with:
@@ -16,4 +16,4 @@ jobs:
         ${{ github.ref_name == 'beta' && 'beta' || github.ref_name ==
         'canary' && 'canary' || 'latest' }}
 
-      package: './packages/no-exist'
+      package: './packages/function-swap'
