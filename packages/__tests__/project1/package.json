@@ -1,0 +1,18 @@
+{
+  "name": "project1",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "fmt": "oxfmt",
+    "lint": "oxlint --fix && pnpm run fmt",
+    "posttest": "exit 0",
+    "test:only": "vitest run --no-coverage",
+    "_ci": "pnpm run lint && pnpm run test"
+  },
+  "devDependencies": {
+    "@bemedev/new-package-name-to-change": "workspace:^",
+    "@bemedev/shared-vitest": "workspace:^",
+    "typescript": "^7.0.2"
+  }
+}

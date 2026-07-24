@@ -1,0 +1,74 @@
+{
+  "name": "@bemedev/new-package-monorepo",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Monorepo workspace root",
+  "author": {
+    "email": "bri_lvi@icloud.com",
+    "name": "chlbri",
+    "url": "https://bemedev.vercel.app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chlbri/new-package"
+  },
+  "license": "MIT",
+  "type": "module",
+  "maintainers": [
+    {
+      "email": "bri_lvi@icloud.com",
+      "name": "chlbri",
+      "url": "https://bemedev.vercel.app"
+    }
+  ],
+  "contributors": [
+    {
+      "email": "bri_lvi@icloud.com",
+      "name": "chlbri",
+      "url": "https://bemedev.vercel.app"
+    }
+  ],
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "pnpm:devPreinstall": "node -e \"const fs=require('fs'); const pkg=JSON.parse(fs.readFileSync('./package.json')); const version=require('child_process').execSync('pnpm -v').toString().trim(); pkg.packageManager='pnpm@' + version; fs.writeFileSync('./package.json', JSON.stringify(pkg, null, 2) + '\\n');\"",
+    "build": "pnpm -r --sort run build",
+    "config": "pnpm i",
+    "_ci": "pnpm install && pnpm -r --sort run _ci",
+    "ci": "CI=$(date +%s) && pnpm run _ci && echo \"\n✅ CI takes $(($(date +%s) - CI))s\n\"",
+    "ci:admin": "CI_ADMIN=$(date +%s) && pnpm run rm && pnpm run up && pnpm run _ci && echo \"\n✅ Admin CI takes $(($(date +%s) - CI_ADMIN))s\n\"",
+    "rimraf": "pnpx rimraf -rf",
+    "rinit": "pnpm run rm && pnpm run config",
+    "lint": "pnpm run -r lint",
+    "test": "pnpm run -r test",
+    "pretest": "pnpm run -r pretest",
+    "posttest": "pnpm run -r posttest",
+    "test:only": "pnpm run -r test:only",
+    "rm": "pnpm clean lockfile",
+    "up": "pnpm up -r --latest && pnpm dlx npm-check-updates -w -u --peer --dep peer,optional,prod",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@bemedev/dev-utils": "^1.1.0",
+    "@size-limit/file": "^12.1.0",
+    "@types/node": "^26.1.1",
+    "@vitest/coverage-v8": "^4.1.10",
+    "@vitest/ui": "4.1.10",
+    "glob": "^13.0.6",
+    "globals": "^17.7.0",
+    "husky": "^9.1.7",
+    "onchange": "^7.1.0",
+    "oxfmt": "^0.60.0",
+    "oxlint": "^1.75.0",
+    "prettier": "^3.9.6",
+    "pretty-quick": "^4.2.2",
+    "rolldown": "1.2.0",
+    "size-limit": "^12.1.0",
+    "tslib": "^2.8.1",
+    "tsx": "^4.23.1",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10"
+  },
+  "packageManager": "pnpm@11.17.0"
+}
