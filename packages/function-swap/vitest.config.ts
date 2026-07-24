@@ -1,6 +1,6 @@
-import { shared } from '@bemedev/shared-vitest';
+import { defineProject } from '@bemedev/dev-utils/vitest-extended';
 
-export default shared({
+export default defineProject({
   test: {
     name: 'function-swap',
   },

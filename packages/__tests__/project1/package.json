@@ -12,7 +12,6 @@
   },
   "devDependencies": {
     "@bemedev/function-swap": "workspace:^",
-    "@bemedev/shared-vitest": "workspace:^",
     "typescript": "^7.0.2"
   }
 }
