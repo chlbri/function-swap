@@ -1,4 +1,4 @@
-import { swap } from '@bemedev/function-swap';
+import { swap } from './swap';
 import { createTests } from '@bemedev/dev-utils/vitest-extended';
 
 describe('TESTS', () => {

@@ -1,7 +1,3 @@
 import { defineProject } from '@bemedev/dev-utils/vitest-extended';
 
-export default defineProject({
-  test: {
-    name: 'function-swap',
-  },
-});
+export default defineProject({ test: { name: 'function-swap' } });

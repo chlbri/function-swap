@@ -12,8 +12,8 @@ importers:
         specifier: ^1.1.0
         version: 1.1.0(rolldown@1.2.0)(rollup@4.60.3)(supports-color@7.2.0)(vite@8.0.12(@types/node@26.1.1)(esbuild@0.28.1)(tsx@4.23.1))(vitest@4.1.10)
       '@size-limit/file':
-        specifier: ^12.1.0
-        version: 12.1.0(size-limit@12.1.0)
+        specifier: ^13.0.1
+        version: 13.0.1(size-limit@13.0.1)
       '@types/node':
         specifier: ^26.1.1
         version: 26.1.1
@@ -51,8 +51,8 @@ importers:
         specifier: 1.2.0
         version: 1.2.0
       size-limit:
-        specifier: ^12.1.0
-        version: 12.1.0
+        specifier: ^13.0.1
+        version: 13.0.1
       tslib:
         specifier: ^2.8.1
         version: 2.8.1
@@ -68,14 +68,24 @@ importers:
 
   packages/__tests__/project1:
     devDependencies:
+      '@bemedev/dev-utils':
+        specifier: ^1.1.0
+        version: 1.1.0(rolldown@1.2.0)(rollup@4.60.3)(supports-color@7.2.0)(vite@8.0.12(@types/node@26.1.1)(esbuild@0.28.1)(tsx@4.23.1))(vitest@4.1.10)
       '@bemedev/function-swap':
         specifier: workspace:^
         version: link:../../function-swap
       typescript:
         specifier: ^7.0.2
         version: 7.0.2
+      vitest:
+        specifier: ^4.1.10
+        version: 4.1.10(@types/node@26.1.1)(@vitest/coverage-v8@4.1.10)(@vitest/ui@4.1.10)(vite@8.0.12(@types/node@26.1.1)(esbuild@0.28.1)(tsx@4.23.1))
 
   packages/function-swap:
+    dependencies:
+      '@bemedev/decompose':
+        specifier: ^2.2.0
+        version: 2.2.0(@bemedev/types@0.4.2)
     devDependencies:
       '@bemedev/dev-utils':
         specifier: ^1.1.0
@@ -113,6 +123,12 @@ packages:
     resolution: {integrity: sha512-6zABk/ECA/QYSCQ1NGiVwwbQerUCZ+TQbp64Q3AgmfNvurHH0j8TtXa1qbShXA6qqkpAj4V5W8pP6mLe1mcMqA==}
     engines: {node: '>=18'}
 
+  '@bemedev/decompose@2.2.0':
+    resolution: {integrity: sha512-fawzPvVwSaX65bjL4sGxfoSxnsmmj3d8mF39w2AP7l+xngXY/pQyI7ugje8e2izpIiFRp1/L9VF3yuF/VZVoRg==}
+    engines: {node: '>=20'}
+    peerDependencies:
+      '@bemedev/types': 0.4.2
+
   '@bemedev/dev-utils@1.1.0':
     resolution: {integrity: sha512-oH+rWW/b5VNlIpDXqqVAhK5PsxTglMLhmzAHmG4YDXEI6aR2buIywa5hnbO4Ncay2BHQ2O6ZyC5SrqIzpr9b2g==}
     engines: {node: '>=24'}
@@ -120,6 +136,10 @@ packages:
     peerDependencies:
       rolldown: ^1.1.5
       vitest: 4.1.10
+
+  '@bemedev/types@0.4.2':
+    resolution: {integrity: sha512-NMbZAIbjlHJ+GeQkvFi8vMUBI0kqArR73nx67rXwMjKdqQbOvc9nsQKgdAEPKaGxV6bWXKzzuEFqzsuQKKp2Yw==}
+    engines: {node: '>=22'}
 
   '@blakeembrey/deque@1.0.5':
     resolution: {integrity: sha512-6xnwtvp9DY1EINIKdTfvfeAtCYw4OqBZJhtiqkT3ivjnEfa25VQ3TsKvaFfKm8MyGIEfE95qLe+bNEt3nB0Ylg==}
@@ -1056,11 +1076,11 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@size-limit/file@12.1.0':
-    resolution: {integrity: sha512-eGwDcIufnNnvJRzv3liDOn6MAOGgmOTUdpeGQ2KuRTlgIgO54AJH1ilvktlJc6PIjNfwpYY0dOGyap1QgM1swQ==}
+  '@size-limit/file@13.0.1':
+    resolution: {integrity: sha512-qdbGUxRAjym5gnkYEjsNsdOfmkDUvDX06FLhLGUxQ0oJtIWDd2lsOmTMwh5JuAV1XmJCplbqpMJ2b5eIhHl7Lg==}
     engines: {node: ^20.0.0 || ^22.0.0 || >=24.0.0}
     peerDependencies:
-      size-limit: 12.1.0
+      size-limit: 13.0.1
 
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
@@ -1823,15 +1843,10 @@ packages:
     resolution: {integrity: sha512-2wcC/oGxHis/BoHkkPwldgiPSYcpZK3JU28WoMVv55yHJgcZ8rlXvuG9iZggz+sU1d4bRgIGASwyWqjxu3FM0g==}
     engines: {node: '>=18'}
 
-  size-limit@12.1.0:
-    resolution: {integrity: sha512-VnDS2fycANrJFVPQwjaD+h+hkISY7EB3LsPsYWje4lBCjQwwsZLxjwwRwVJKHrcj2ZqyG+DdXykWm9mbZklZrw==}
-    engines: {node: ^20.0.0 || ^22.0.0 || >=24.0.0}
+  size-limit@13.0.1:
+    resolution: {integrity: sha512-LKWgnVUfw79W5gcKGIHqjEqBMoZ+YgfYYzlDheYwbRJq1DaaRgOjotFm61YOI/4hbgh4V1Es0uGGp6HLktI3Vw==}
+    engines: {node: ^22.18.0 || ^24.0.0 || >=26.0.0}
     hasBin: true
-    peerDependencies:
-      jiti: ^2.0.0
-    peerDependenciesMeta:
-      jiti:
-        optional: true
 
   slash@3.0.0:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
@@ -1896,6 +1911,10 @@ packages:
   tree-kill@1.2.2:
     resolution: {integrity: sha512-L0Orpi8qGpRG//Nd+H90vFB+3iHnue1zSSGmNOOCh1GLJ7rUKVwV2HvijphGQS2UmhUZewS9VgvxYIdgr+fG1A==}
     hasBin: true
+
+  ts-deepmerge@7.0.3:
+    resolution: {integrity: sha512-Du/ZW2RfwV/D4cmA5rXafYjBQVuvu4qGiEEla4EmEHVHgRdx68Gftx7i66jn2bzHPwSVZY36Ae6OuDn9el4ZKA==}
+    engines: {node: '>=14.13.1'}
 
   tsc-alias@1.9.1:
     resolution: {integrity: sha512-sFZdVFthH8uvdplPJrOYGOHcxu6UPtcAcY678JPwEQiMzgLZYFO7Qc/rzELp7ingTc+OxtzH6n+8Pn2eVQep6w==}
@@ -2040,6 +2059,11 @@ snapshots:
 
   '@bcoe/v8-coverage@1.0.2': {}
 
+  '@bemedev/decompose@2.2.0(@bemedev/types@0.4.2)':
+    dependencies:
+      '@bemedev/types': 0.4.2
+      ts-deepmerge: 7.0.3
+
   '@bemedev/dev-utils@1.1.0(rolldown@1.2.0)(rollup@4.60.3)(supports-color@7.2.0)(vite@8.0.12(@types/node@26.1.1)(esbuild@0.28.1)(tsx@4.23.1))(vitest@4.1.10)':
     dependencies:
       '@typescript/typescript6': 6.0.2
@@ -2058,6 +2082,8 @@ snapshots:
       - rollup
       - supports-color
       - vite
+
+  '@bemedev/types@0.4.2': {}
 
   '@blakeembrey/deque@1.0.5': {}
 
@@ -2579,9 +2605,9 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.60.3':
     optional: true
 
-  '@size-limit/file@12.1.0(size-limit@12.1.0)':
+  '@size-limit/file@13.0.1(size-limit@13.0.1)':
     dependencies:
-      size-limit: 12.1.0
+      size-limit: 13.0.1
 
   '@standard-schema/spec@1.1.0': {}
 
@@ -3347,13 +3373,12 @@ snapshots:
       mrmime: 2.0.1
       totalist: 3.0.1
 
-  size-limit@12.1.0:
+  size-limit@13.0.1:
     dependencies:
       bytes-iec: 3.1.1
       lilconfig: 3.1.3
       nanospinner: 1.2.2
       picocolors: 1.1.1
-      tinyglobby: 0.2.17
 
   slash@3.0.0: {}
 
@@ -3399,6 +3424,8 @@ snapshots:
   totalist@3.0.1: {}
 
   tree-kill@1.2.2: {}
+
+  ts-deepmerge@7.0.3: {}
 
   tsc-alias@1.9.1:
     dependencies:

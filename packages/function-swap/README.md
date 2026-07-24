@@ -1,8 +1,80 @@
-# Beatifull lib
+# @bemedev/function-swap
 
-A beautifull description
+A TypeScript utility that lets you remap a function's parameters by
+swapping their order or decomposing them into named keys — without changing
+the original function signature.
 
 <br/>
+
+## Installation
+
+```bash
+pnpm add @bemedev/function-swap
+```
+
+<br/>
+
+## Usage
+
+```ts
+import { swap } from '@bemedev/function-swap';
+
+// Original function: (a, b, c) => string
+const greet = (first: string, last: string, title: string) =>
+  `${title} ${first} ${last}`;
+
+// Remap: call as (title, last, first) instead
+const swappedGreet = swap(greet)('[2]', '[1]', '[0]');
+
+swappedGreet('Dr.', 'Smith', 'John'); // => "Dr. John Smith"
+```
+
+### Aliases
+
+```ts
+import { swap } from '@bemedev/function-swap';
+
+swap.fromFunction(fn); // same as swap(fn)
+swap.fromFn(fn); // same as swap(fn)
+```
+
+### `swap.fromObject`
+
+`swap.fromObject` is the **type-first** variant. Instead of wrapping an
+existing function, you declare the **object shape** `P` as a type
+parameter, then provide a decomposed key array, and finally pass in (or let
+TypeScript infer) the implementation function.
+
+```
+swap.fromObject<P>()(...keys)(fn) => fn
+```
+
+| Step        | What you provide                               | What you get               |
+| ----------- | ---------------------------------------------- | -------------------------- |
+| `<P>()`     | Object type `P` as a generic                   | A key-selector builder     |
+| `(...keys)` | Decomposed key strings / nested maps           | A typed function builder   |
+| `(fn)`      | Implementation matching the resolved signature | The same `fn`, fully typed |
+
+**Example — build a typed function over an object shape:**
+
+```ts
+import { swap } from '@bemedev/function-swap';
+
+type Person = { name: string; age: number };
+
+// Declare P = Person, then pick the keys you need
+const buildGreeter = swap.fromObject<Person>()('name', 'age');
+
+const greet = buildGreeter(
+  (name: string, age: number) => `Hello ${name}, you are ${age}`,
+);
+
+greet('Alice', 30); // => "Hello Alice, you are 30"
+```
+
+> **Note:** `swap.fromObject` is type-safe — TypeScript resolves the
+> correct argument types from the decomposed key paths of `P` and will
+> error if `fn`'s signature does not match.
 
 ## Licence
 

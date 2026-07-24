@@ -1,6 +1,6 @@
 {
   "name": "@bemedev/function-swap",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "The package name need to be changed",
   "type": "module",
   "main": "lib/index.js",
@@ -33,7 +33,13 @@
     }
   ],
   "keywords": [
-    "//TODO:"
+    "swap",
+    "function",
+    "builder",
+    "high-order function",
+    "function builder",
+    "function swap",
+    "bemedev"
   ],
   "scripts": {
     "build": "pnpm run rm:lib && pnpm run rolldown",
@@ -47,6 +53,9 @@
     "_ci": "pnpm run lint && pnpm run test",
     "size": "size-limit",
     "rolldown": "rolldown -c"
+  },
+  "dependencies": {
+    "@bemedev/decompose": "^2.2.0"
   },
   "devDependencies": {
     "@bemedev/dev-utils": "^1.1.0",

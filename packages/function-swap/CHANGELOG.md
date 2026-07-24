@@ -1,12 +1,26 @@
 ## CHANGELOG
 
+<details>
+<summary>
+
+## **[0.1.0] - 24/07/2026** => _19:53_
+
+</summary>
+
+- **Refactor**: Rename package from `packages/core` to
+  `packages/function-swap`; npm name changed to `@bemedev/function-swap`
+- **Add**: `swap` function — takes any function and returns a higher-order
+  builder that remaps its parameters via a decomposed key map
+- **Add**: `swap.fromFunction` / `swap.fromFn` aliases for `swap`
+- **Add**: `swap.fromObject` variant for object-shaped parameter remapping
+- **Add**: `@bemedev/decompose` as a runtime dependency
+- **Refactor**: Remove `packages/utils/vitest` (`@bemedev/shared-vitest`);
+  migrate to `@bemedev/dev-utils` vitest-extended config
+- <u>Test coverage **_100%_**</u>
+
+</details>
+
 <br/>
-<br/>
-
-### Version [0.0.1] --> _date & hour_
-
-- ✨ Première version de la bibliothèque
-
 <br/>
 
 ## Auteur
