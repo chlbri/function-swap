@@ -3,6 +3,22 @@
 <details>
 <summary>
 
+## **[0.2.0] - 26/07/2026** => _01:05_
+
+</summary>
+
+- **Add**: `constraint` method on `swap(...)` for typed parameter constraints and reverse mapping
+- **Refactor**: Replace `swap.fromObject` with `swap.fromParameters` / `swap.fromParams`
+- **Enhance**: Improved decomposed key type inference (`DecomposeString2`, `AllowedNames`, `SubType`)
+- <u>Test coverage **_100%_**</u>
+
+</details>
+
+<br/>
+
+<details>
+<summary>
+
 ## **[0.1.0] - 24/07/2026** => _19:53_
 
 </summary>

@@ -38,43 +38,54 @@ swap.fromFunction(fn); // same as swap(fn)
 swap.fromFn(fn); // same as swap(fn)
 ```
 
-### `swap.fromObject`
+### `swap.fromParameters` / `swap.fromParams`
 
-`swap.fromObject` is the **type-first** variant. Instead of wrapping an
-existing function, you declare the **object shape** `P` as a type
-parameter, then provide a decomposed key array, and finally pass in (or let
-TypeScript infer) the implementation function.
+`swap.fromParameters` (or `swap.fromParams`) is the **type-first** variant. Instead of wrapping an
+existing function, you declare the target **parameter shape** `P` as a tuple type parameter,
+then provide decomposed key selectors, and finally pass in the implementation function.
 
 ```
-swap.fromObject<P>()(...keys)(fn) => fn
+swap.fromParams<P>()(...keys)(fn) => fn
 ```
 
 | Step        | What you provide                               | What you get               |
 | ----------- | ---------------------------------------------- | -------------------------- |
-| `<P>()`     | Object type `P` as a generic                   | A key-selector builder     |
+| `<P>()`     | Tuple parameter type `P` as a generic          | A key-selector builder     |
 | `(...keys)` | Decomposed key strings / nested maps           | A typed function builder   |
-| `(fn)`      | Implementation matching the resolved signature | The same `fn`, fully typed |
+| `(fn)`      | Implementation matching the resolved signature | The function `fn`           |
 
-**Example — build a typed function over an object shape:**
+**Example — build a typed function over parameter shapes:**
 
 ```ts
 import { swap } from '@bemedev/function-swap';
 
-type Person = { name: string; age: number };
+type UserParam = [{ data: string; age: number }, number];
 
-// Declare P = Person, then pick the keys you need
-const buildGreeter = swap.fromObject<Person>()('name', 'age');
+// Select target parameter paths
+const swapFn = swap.fromParams<UserParam>()('[1]', '[0].data', '[0].age');
 
-const greet = buildGreeter(
-  (name: string, age: number) => `Hello ${name}, you are ${age}`,
-);
+const fn = swapFn((length, data, age) => `${length}:${data.toUpperCase()}-${age * 2}`);
 
-greet('Alice', 30); // => "Hello Alice, you are 30"
+fn(5, 'alice', 30); // => "5:ALICE-60"
 ```
 
-> **Note:** `swap.fromObject` is type-safe — TypeScript resolves the
-> correct argument types from the decomposed key paths of `P` and will
-> error if `fn`'s signature does not match.
+### `swap(fn).constraint`
+
+`swap(fn).constraint` lets you define explicit parameter maps between target input parameter types `P` and source function parameters.
+
+```ts
+import { swap } from '@bemedev/function-swap';
+
+const subtract = (a: number, b: number) => a - b;
+
+// Swap arguments [0] and [1] with a constraint map
+const swappedSubtract = swap(subtract).constraint<[number, number]>()({
+  '[0]': '[1]',
+  '[1]': '[0]',
+});
+
+swappedSubtract(2, 10); // => 8 (10 - 2)
+```
 
 ## Licence
 

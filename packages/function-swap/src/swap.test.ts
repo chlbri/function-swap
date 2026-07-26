@@ -8,6 +8,7 @@ describe('TESTS', () => {
   const swappedConcat = swap(concat)('[1]', '[0]');
   const format = (a: number, b: string) => `${a * 2}:${b.toUpperCase()}`;
   const swappedFmtObjArr = swap(format)({ num: '[0]' }, '[1]');
+  const STRING_UPPERCASE_ERROR = `Cannot read properties of undefined (reading 'toUpperCase')`;
 
   const swappedFmtObj = swap.fromFunction(format)({
     num: '[0]',
@@ -43,7 +44,7 @@ describe('TESTS', () => {
   });
 
   describe('#08 => swap.fromObject', () => {
-    const swap1 = swap.fromObject<{ data: string; age: number }>();
+    const swap1 = swap.fromParameters<{ data: string; age: number }>();
 
     test('#01 => complex', () => {
       const fn = swap1(
@@ -74,33 +75,106 @@ describe('TESTS', () => {
         ),
       );
     });
+
+    test('#04 => Edge case', () => {
+      const swap1 =
+        swap.fromParams<[{ data: string; age: number }, number]>();
+
+      const fn = swap1(
+        '[1]',
+        '[0].data',
+        '[0].age',
+      )((length, data, age) => {
+        return `${length}:${data.toUpperCase()}-${age * 2}`;
+      });
+
+      expect(fn(5, 'hi', 10)).toBe('5:HI-20');
+    });
   });
 
   describe('#08 => Edge cases', () => {
     const _fn1 = (a: number, b: number, c: number) => a + b * 2 + c;
-    const fn1 = swap(_fn1)({
-      value1: '[0]',
-      composite: { value2: '[1]' },
-      value3: '[2]',
+    describe('#01 => Deep nested', () => {
+      const fn1 = swap(_fn1)({
+        value1: '[0]',
+        composite: { value2: '[1]' },
+        value3: '[2]',
+      });
+
+      const { acceptation, success } = createTests(fn1);
+
+      describe('#00 => Acceptation', acceptation);
+      describe(
+        '#01 => CASES',
+        success(
+          {
+            invite: 'fn(1,2,3) => 8',
+            parameters: { value1: 1, composite: { value2: 2 }, value3: 3 },
+            expected: 8,
+          },
+          {
+            invite: 'fn(1,2,4) => 9',
+            parameters: { value1: 1, composite: { value2: 2 }, value3: 4 },
+            expected: 9,
+          },
+        ),
+      );
     });
 
-    const { acceptation, success } = createTests(fn1);
+    test('#01 => arg not provided', () => {
+      const fn1 = swap(format)({ num: '[0]' });
+      const fn = () => fn1({ num: 42 });
+      expect(fn).toThrow(STRING_UPPERCASE_ERROR);
+    });
+  });
 
-    describe('#00 => Acceptation', acceptation);
-    describe(
-      '#01 => CASES',
-      success(
-        {
-          invite: 'fn(1,2,3) => 8',
-          parameters: { value1: 1, composite: { value2: 2 }, value3: 3 },
-          expected: 8,
-        },
-        {
-          invite: 'fn(1,2,4) => 9',
-          parameters: { value1: 1, composite: { value2: 2 }, value3: 4 },
-          expected: 9,
-        },
-      ),
-    );
+  describe('#09 => constraint', () => {
+    test('#01 => swappedSubtract(2, 10) is 8', () => {
+      const swappedSubtract = swap(subtract).constraint<
+        [number, number]
+      >()({ '[0]': '[1]', '[1]': '[0]' });
+
+      expect(swappedSubtract(2, 10)).toBe(8);
+    });
+
+    test('#02 => swappedFormat({ num: 5 }, "hi") is "10:HI"', () => {
+      const swappedFormat = swap(format).constraint<
+        [{ num: number }, string]
+      >()({ '[0].num': '[0]', '[1]': '[1]' });
+
+      expect(swappedFormat({ num: 5 }, 'hi')).toBe('10:HI');
+    });
+
+    test('#03 => typeError', () => {
+      const reverse = swap(swappedFmtObj).constraint<[number, string]>()({
+        '[0]': '[0].num',
+        //@ts-expect-error not right type
+        '[1]': '[0].num',
+      });
+
+      const fn = () => reverse(5, 'hi');
+      expect(fn).toThrow(STRING_UPPERCASE_ERROR);
+    });
+  });
+
+  describe('#10 => reverse engineering', () => {
+    const reverse = swap(swappedFmtObj).constraint<[number, string]>()({
+      '[0]': '[0].num',
+      '[1]': '[0].str',
+    });
+
+    const actual = reverse(5, 'hi');
+
+    test('#00 => equals "10:HI"', () => {
+      expect(actual).toBe('10:HI');
+    });
+
+    test('#01 => equals swappedFmtObj', () => {
+      expect(actual).toBe(swappedFmtObj({ num: 5, str: 'hi' }));
+    });
+
+    test('#02 => equals format', () => {
+      expect(actual).toBe(format(5, 'hi'));
+    });
   });
 });
