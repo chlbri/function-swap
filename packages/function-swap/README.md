@@ -40,19 +40,20 @@ swap.fromFn(fn); // same as swap(fn)
 
 ### `swap.fromParameters` / `swap.fromParams`
 
-`swap.fromParameters` (or `swap.fromParams`) is the **type-first** variant. Instead of wrapping an
-existing function, you declare the target **parameter shape** `P` as a tuple type parameter,
-then provide decomposed key selectors, and finally pass in the implementation function.
+`swap.fromParameters` (or `swap.fromParams`) is the **type-first** variant.
+Instead of wrapping an existing function, you declare the target
+**parameter shape** `P` as a tuple type parameter, then provide decomposed
+key selectors, and finally pass in the implementation function.
 
 ```
 swap.fromParams<P>()(...keys)(fn) => fn
 ```
 
-| Step        | What you provide                               | What you get               |
-| ----------- | ---------------------------------------------- | -------------------------- |
-| `<P>()`     | Tuple parameter type `P` as a generic          | A key-selector builder     |
-| `(...keys)` | Decomposed key strings / nested maps           | A typed function builder   |
-| `(fn)`      | Implementation matching the resolved signature | The function `fn`           |
+| Step        | What you provide                               | What you get             |
+| ----------- | ---------------------------------------------- | ------------------------ |
+| `<P>()`     | Tuple parameter type `P` as a generic          | A key-selector builder   |
+| `(...keys)` | Decomposed key strings / nested maps           | A typed function builder |
+| `(fn)`      | Implementation matching the resolved signature | The function `fn`        |
 
 **Example — build a typed function over parameter shapes:**
 
@@ -64,14 +65,17 @@ type UserParam = [{ data: string; age: number }, number];
 // Select target parameter paths
 const swapFn = swap.fromParams<UserParam>()('[1]', '[0].data', '[0].age');
 
-const fn = swapFn((length, data, age) => `${length}:${data.toUpperCase()}-${age * 2}`);
+const fn = swapFn(
+  (length, data, age) => `${length}:${data.toUpperCase()}-${age * 2}`,
+);
 
 fn(5, 'alice', 30); // => "5:ALICE-60"
 ```
 
 ### `swap(fn).constraint`
 
-`swap(fn).constraint` lets you define explicit parameter maps between target input parameter types `P` and source function parameters.
+`swap(fn).constraint` lets you define explicit parameter maps between
+target input parameter types `P` and source function parameters.
 
 ```ts
 import { swap } from '@bemedev/function-swap';

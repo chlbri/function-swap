@@ -7,9 +7,12 @@
 
 </summary>
 
-- **Add**: `constraint` method on `swap(...)` for typed parameter constraints and reverse mapping
-- **Refactor**: Replace `swap.fromObject` with `swap.fromParameters` / `swap.fromParams`
-- **Enhance**: Improved decomposed key type inference (`DecomposeString2`, `AllowedNames`, `SubType`)
+- **Add**: `constraint` method on `swap(...)` for typed parameter
+  constraints and reverse mapping
+- **Refactor**: Replace `swap.fromObject` with `swap.fromParameters` /
+  `swap.fromParams`
+- **Enhance**: Improved decomposed key type inference (`DecomposeString2`,
+  `AllowedNames`, `SubType`)
 - <u>Test coverage **_100%_**</u>
 
 </details>
