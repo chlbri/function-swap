@@ -3,12 +3,29 @@
 <details>
 <summary>
 
+## **[0.2.4] - 29/07/2026** => _12:33_
+
+</summary>
+
+- **Fix**: Correct key mapping direction in `out.constraint` runtime
+  implementation and `DecomposeString2` type helper
+- <u>Test coverage **_100%_**</u>
+
+</details>
+
+<br/>
+
+<details>
+<summary>
+
 ## **[0.2.3] - 29/07/2026** => _11:54_
 
 </summary>
 
-- **Refactor**: Update `DecomposeString2` type mapping to make mapped keys optional
-- **Docs**: Add warning notification that `DecomposeString2` is not partial at runtime and present all exported types in `README.md`
+- **Refactor**: Update `DecomposeString2` type mapping to make mapped keys
+  optional
+- **Docs**: Add warning notification that `DecomposeString2` is not partial
+  at runtime and present all exported types in `README.md`
 - <u>Test coverage **_100%_**</u>
 
 </details>
@@ -22,7 +39,8 @@
 
 </summary>
 
-- **Refactor**: Export `Decompose` and `DecomposedKeys` type helpers, and rename parameter keys helper to `DecomposedParameterKeys`
+- **Refactor**: Export `Decompose` and `DecomposedKeys` type helpers, and
+  rename parameter keys helper to `DecomposedParameterKeys`
 - <u>Test coverage **_100%_**</u>
 
 </details>

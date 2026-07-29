@@ -84,8 +84,8 @@ importers:
   packages/function-swap:
     devDependencies:
       '@bemedev/decompose':
-        specifier: ^2.2.0
-        version: 2.2.0(@bemedev/types@0.4.2)
+        specifier: ^2.3.0
+        version: 2.3.0
       '@bemedev/dev-utils':
         specifier: ^1.1.1
         version: 1.1.1(rolldown@1.2.0)(rollup@4.60.3)(supports-color@7.2.0)(vite@8.0.12(@types/node@26.1.2)(esbuild@0.28.1)(tsx@4.23.1))(vitest@4.1.10)
@@ -122,11 +122,9 @@ packages:
     resolution: {integrity: sha512-6zABk/ECA/QYSCQ1NGiVwwbQerUCZ+TQbp64Q3AgmfNvurHH0j8TtXa1qbShXA6qqkpAj4V5W8pP6mLe1mcMqA==}
     engines: {node: '>=18'}
 
-  '@bemedev/decompose@2.2.0':
-    resolution: {integrity: sha512-fawzPvVwSaX65bjL4sGxfoSxnsmmj3d8mF39w2AP7l+xngXY/pQyI7ugje8e2izpIiFRp1/L9VF3yuF/VZVoRg==}
-    engines: {node: '>=20'}
-    peerDependencies:
-      '@bemedev/types': 0.4.2
+  '@bemedev/decompose@2.3.0':
+    resolution: {integrity: sha512-/Tzc/9TH2inlVuGRXLUbKHWN4ob07t414yXGc/Y4XSUFLnHVJiRJE56tlDGZedVQzKvamPEV1n9vIaIJhfLEVg==}
+    engines: {node: '>=24'}
 
   '@bemedev/dev-utils@1.1.1':
     resolution: {integrity: sha512-WKpxzMzgjKGzw3InmKTb+lTER1pQUO6eIB/EKlbJVKz/8H1qHnkkQPhh2Vyl26llGBIKXUgdpYp9lj5EvSSNhg==}
@@ -135,10 +133,6 @@ packages:
     peerDependencies:
       rolldown: ^1.2.0
       vitest: 4.1.10
-
-  '@bemedev/types@0.4.2':
-    resolution: {integrity: sha512-NMbZAIbjlHJ+GeQkvFi8vMUBI0kqArR73nx67rXwMjKdqQbOvc9nsQKgdAEPKaGxV6bWXKzzuEFqzsuQKKp2Yw==}
-    engines: {node: '>=22'}
 
   '@blakeembrey/deque@1.0.5':
     resolution: {integrity: sha512-6xnwtvp9DY1EINIKdTfvfeAtCYw4OqBZJhtiqkT3ivjnEfa25VQ3TsKvaFfKm8MyGIEfE95qLe+bNEt3nB0Ylg==}
@@ -1912,8 +1906,8 @@ packages:
     resolution: {integrity: sha512-L0Orpi8qGpRG//Nd+H90vFB+3iHnue1zSSGmNOOCh1GLJ7rUKVwV2HvijphGQS2UmhUZewS9VgvxYIdgr+fG1A==}
     hasBin: true
 
-  ts-deepmerge@7.0.3:
-    resolution: {integrity: sha512-Du/ZW2RfwV/D4cmA5rXafYjBQVuvu4qGiEEla4EmEHVHgRdx68Gftx7i66jn2bzHPwSVZY36Ae6OuDn9el4ZKA==}
+  ts-deepmerge@8.0.0:
+    resolution: {integrity: sha512-133O+10nJmVI8w5xeVZPEv5PIrv7iaUae07wv1aH8XJH95Ur6YIhWAPhPyP1YPlbPS9fCVcNIZTu7m8urRVF0A==}
     engines: {node: '>=14.13.1'}
 
   tsc-alias@1.9.1:
@@ -2059,10 +2053,9 @@ snapshots:
 
   '@bcoe/v8-coverage@1.0.2': {}
 
-  '@bemedev/decompose@2.2.0(@bemedev/types@0.4.2)':
+  '@bemedev/decompose@2.3.0':
     dependencies:
-      '@bemedev/types': 0.4.2
-      ts-deepmerge: 7.0.3
+      ts-deepmerge: 8.0.0
 
   '@bemedev/dev-utils@1.1.1(rolldown@1.2.0)(rollup@4.60.3)(supports-color@7.2.0)(vite@8.0.12(@types/node@26.1.2)(esbuild@0.28.1)(tsx@4.23.1))(vitest@4.1.10)':
     dependencies:
@@ -2082,8 +2075,6 @@ snapshots:
       - rollup
       - supports-color
       - vite
-
-  '@bemedev/types@0.4.2': {}
 
   '@blakeembrey/deque@1.0.5': {}
 
@@ -3425,7 +3416,7 @@ snapshots:
 
   tree-kill@1.2.2: {}
 
-  ts-deepmerge@7.0.3: {}
+  ts-deepmerge@8.0.0: {}
 
   tsc-alias@1.9.1:
     dependencies:

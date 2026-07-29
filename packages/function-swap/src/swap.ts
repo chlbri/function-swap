@@ -19,7 +19,7 @@ const _swap: FunctionSwap = fn => {
     return (...newArgs: any[]) => {
       const decomposedMap: Record<string, any> = {};
 
-      for (const [keyP, keyF] of Object.entries(keysMatch)) {
+      for (const [keyF, keyP] of Object.entries(keysMatch)) {
         decomposedMap[keyF] = getByKey(newArgs, keyP);
       }
 

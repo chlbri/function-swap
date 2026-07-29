@@ -8,4 +8,4 @@ allowBuilds:
 minimumReleaseAge: 300
 
 minimumReleaseAgeExclude:
-  - '@bemedev/dev-utils@0.8.2'
+  - '@bemedev/*'

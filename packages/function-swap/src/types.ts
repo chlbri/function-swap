@@ -34,10 +34,10 @@ export type SubType<Base extends object, Condition> = Pick<
 >;
 // #endregion
 
-export type DecomposeString2<T, Decomposed> =
+export type DecomposeString<T, Decomposed> =
   Decompose<T> extends infer U
     ? {
-        [K in keyof U]?: AllowedNames<Decomposed, U[K]>;
+        [K in keyof Decomposed]: AllowedNames<U, Decomposed[K]>;
       }
     : never;
 
@@ -64,7 +64,7 @@ export type FunctionSwapLevel2<F extends AnyFunction> = {
     ...paramArray: P
   ): (...args: ResolveParamArray<P, DecomposedMap<F>>) => ReturnType<F>;
   constraint: <P extends readonly any[]>() => <
-    const P1 extends DecomposeString2<P, Decompose<Parameters<F>>>,
+    const P1 extends DecomposeString<P, Decompose<Parameters<F>>>,
   >(
     data: P1,
   ) => (...args: P) => ReturnType<F>;

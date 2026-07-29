@@ -95,37 +95,57 @@ const swappedSubtract = swap(subtract).constraint<[number, number]>()({
 swappedSubtract(2, 10); // => 8 (10 - 2)
 ```
 
-> [!NOTE] `DecomposeString2` is **not partial** at runtime. Even though TypeScript optional property syntax (`?`) allows omitting keys in the constraint mapping object, all decomposed keys required by the target function must be mapped. Omitting required keys will result in `undefined` values during argument recomposition and will fail at runtime if the target function expects them.
+> [!NOTE] `DecomposeString2` is **not partial** at runtime. Even though
+> TypeScript optional property syntax (`?`) allows omitting keys in the
+> constraint mapping object, all decomposed keys required by the target
+> function must be mapped. Omitting required keys will result in
+> `undefined` values during argument recomposition and will fail at runtime
+> if the target function expects them.
 
 <br/>
 
 ## Exported Types
 
-`@bemedev/function-swap` exports the following utility types and function signatures:
+`@bemedev/function-swap` exports the following utility types and function
+signatures:
 
 ### Core Function & Builder Types
 
-- **`AnyFunction`**: Generic function signature type `(...args: any[]) => any`.
+- **`AnyFunction`**: Generic function signature type
+  `(...args: any[]) => any`.
 - **`FunctionSwap`**: Function signature for `swap(fn)`.
-- **`FunctionSwapLevel2<F>`**: Return type of `swap(fn)` providing key-selector mapping and `.constraint<P>()`.
-- **`FunctionSwapParams`**: Function signature for `swap.fromParameters` / `swap.fromParams`.
+- **`FunctionSwapLevel2<F>`**: Return type of `swap(fn)` providing
+  key-selector mapping and `.constraint<P>()`.
+- **`FunctionSwapParams`**: Function signature for `swap.fromParameters` /
+  `swap.fromParams`.
 
 ### Parameter Selection & Mapping Types
 
-- **`ObjectFrom<T extends string>`**: Union type of string key path `T` or nested key map `ObjectFromMap<T>`.
-- **`ObjectFromMap<T extends string>`**: Recursive dictionary mapping string keys to `ObjectFrom<T>`.
-- **`ResolveObjectFrom<P, D>`**: Resolves argument type from key selector `P` using decomposed map `D`.
-- **`ResolveParamArray<P, D>`**: Maps tuple of key selectors `P` to resolved parameter types.
+- **`ObjectFrom<T extends string>`**: Union type of string key path `T` or
+  nested key map `ObjectFromMap<T>`.
+- **`ObjectFromMap<T extends string>`**: Recursive dictionary mapping
+  string keys to `ObjectFrom<T>`.
+- **`ResolveObjectFrom<P, D>`**: Resolves argument type from key selector
+  `P` using decomposed map `D`.
+- **`ResolveParamArray<P, D>`**: Maps tuple of key selectors `P` to
+  resolved parameter types.
 
 ### Decomposition & Helper Types
 
-- **`Decompose<T>`**: Decomposes object or tuple type `T` into dot-separated key-value pairs (with leading dot removed).
-- **`DecomposedKeys<T>`**: Extracts all string key paths resulting from decomposing type `T`.
-- **`DecomposedParameterKeys<F>`**: Helper extracting decomposed key paths from parameters of function `F`.
-- **`DecomposedMap<F>`**: Raw decomposed type representation of parameters of function `F`.
-- **`AllowedNames<Base, Condition>`**: Filters property keys of `Base` matching type `Condition`.
-- **`SubType<Base, Condition>`**: Constructs a subtype of `Base` containing only properties matching type `Condition`.
-- **`DecomposeString2<T, Decomposed>`**: Maps decomposed target parameter key paths to matching source key paths. *Note: Not partial at runtime.*
+- **`Decompose<T>`**: Decomposes object or tuple type `T` into
+  dot-separated key-value pairs (with leading dot removed).
+- **`DecomposedKeys<T>`**: Extracts all string key paths resulting from
+  decomposing type `T`.
+- **`DecomposedParameterKeys<F>`**: Helper extracting decomposed key paths
+  from parameters of function `F`.
+- **`DecomposedMap<F>`**: Raw decomposed type representation of parameters
+  of function `F`.
+- **`AllowedNames<Base, Condition>`**: Filters property keys of `Base`
+  matching type `Condition`.
+- **`SubType<Base, Condition>`**: Constructs a subtype of `Base` containing
+  only properties matching type `Condition`.
+- **`DecomposeString2<T, Decomposed>`**: Maps decomposed target parameter
+  key paths to matching source key paths. _Note: Not partial at runtime._
 
 <br/>
 

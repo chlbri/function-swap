@@ -140,30 +140,29 @@ describe('TESTS', () => {
     test('#02 => swappedFormat({ num: 5 }, "hi") is "10:HI"', () => {
       const swappedFormat = swap(format).constraint<
         [{ num: number }, string]
-      >()({ '[0].num': '[0]', '[1]': '[1]' });
+      >()({ '[0]': '[0].num', '[1]': '[1]' });
 
       expect(swappedFormat({ num: 5 }, 'hi')).toBe('10:HI');
     });
 
     test('#03 => typeError', () => {
       const reverse = swap(swappedFmtObj).constraint<[number, string]>()({
-        '[0]': '[0].num',
+        '[0].num': '[0]',
         //@ts-expect-error not right type
-        '[1]': '[0].num',
+        '[0].str': '[0]',
       });
 
       const fn = () => reverse(5, 'hi');
-      expect(fn).toThrow(STRING_UPPERCASE_ERROR);
+      expect(fn).toThrow('b.toUpperCase is not a function');
     });
   });
 
   describe('#10 => reverse engineering', () => {
-    const reverse = swap(swappedFmtObj).constraint<[number, string]>()({
-      '[0]': '[0].num',
-      '[1]': '[0].str',
-    });
+    const reverse = swap(swappedFmtObj).constraint<
+      [number, string, Date]
+    >()({ '[0].num': '[0]', '[0].str': '[1]' });
 
-    const actual = reverse(5, 'hi');
+    const actual = reverse(5, 'hi', new Date());
 
     test('#00 => equals "10:HI"', () => {
       expect(actual).toBe('10:HI');
@@ -176,5 +175,15 @@ describe('TESTS', () => {
     test('#02 => equals format', () => {
       expect(actual).toBe(format(5, 'hi'));
     });
+  });
+
+  test('#11 => reverse engineering, error', () => {
+    const reverse = swap(swappedFmtObj).constraint<
+      [number, string, Date]
+      //@ts-expect-error not enough params
+    >()({ '[0].num': '[0]' });
+
+    const fn = () => reverse(5, 'hi', new Date());
+    expect(fn).toThrow(STRING_UPPERCASE_ERROR);
   });
 });
