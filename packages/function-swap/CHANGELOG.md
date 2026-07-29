@@ -3,6 +3,21 @@
 <details>
 <summary>
 
+## **[0.2.3] - 29/07/2026** => _11:54_
+
+</summary>
+
+- **Refactor**: Update `DecomposeString2` type mapping to make mapped keys optional
+- **Docs**: Add warning notification that `DecomposeString2` is not partial at runtime and present all exported types in `README.md`
+- <u>Test coverage **_100%_**</u>
+
+</details>
+
+<br/>
+
+<details>
+<summary>
+
 ## **[0.2.2] - 29/07/2026** => _11:31_
 
 </summary>

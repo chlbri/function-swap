@@ -37,7 +37,7 @@ export type SubType<Base extends object, Condition> = Pick<
 export type DecomposeString2<T, Decomposed> =
   Decompose<T> extends infer U
     ? {
-        [K in keyof U]: AllowedNames<Decomposed, U[K]>;
+        [K in keyof U]?: AllowedNames<Decomposed, U[K]>;
       }
     : never;
 

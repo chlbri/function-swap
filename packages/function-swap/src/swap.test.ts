@@ -159,7 +159,7 @@ describe('TESTS', () => {
 
   describe('#10 => reverse engineering', () => {
     const reverse = swap(swappedFmtObj).constraint<
-      [number, string, Date?]
+      [number, string, Date]
     >()({ '[0]': '[0].num', '[1]': '[0].str' });
 
     const actual = reverse(5, 'hi', new Date());
@@ -175,5 +175,14 @@ describe('TESTS', () => {
     test('#02 => equals format', () => {
       expect(actual).toBe(format(5, 'hi'));
     });
+  });
+
+  test('#11 => reverse engineering, error', () => {
+    const reverse = swap(swappedFmtObj).constraint<
+      [number, string, Date]
+    >()({ '[0]': '[0].num' });
+
+    const fn = () => reverse(5, 'hi', new Date());
+    expect(fn).toThrow(STRING_UPPERCASE_ERROR);
   });
 });
