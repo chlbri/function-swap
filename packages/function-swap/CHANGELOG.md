@@ -3,6 +3,20 @@
 <details>
 <summary>
 
+## **[0.2.1] - 29/07/2026** => _11:15_
+
+</summary>
+
+- **Refactor**: Move `@bemedev/decompose` to peer dependencies
+- <u>Test coverage **_100%_**</u>
+
+</details>
+
+<br/>
+
+<details>
+<summary>
+
 ## **[0.2.0] - 26/07/2026** => _01:05_
 
 </summary>

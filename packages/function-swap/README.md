@@ -10,7 +10,11 @@ the original function signature.
 
 ```bash
 pnpm add @bemedev/function-swap
+pnpm add -P @bemedev/decompose # Peer dependency
 ```
+
+> [!NOTE] `@bemedev/decompose` is a peer dependency of
+> `@bemedev/function-swap` and must be installed in your project.
 
 <br/>
 

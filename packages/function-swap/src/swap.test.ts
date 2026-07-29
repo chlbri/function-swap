@@ -158,12 +158,11 @@ describe('TESTS', () => {
   });
 
   describe('#10 => reverse engineering', () => {
-    const reverse = swap(swappedFmtObj).constraint<[number, string]>()({
-      '[0]': '[0].num',
-      '[1]': '[0].str',
-    });
+    const reverse = swap(swappedFmtObj).constraint<
+      [number, string, Date?]
+    >()({ '[0]': '[0].num', '[1]': '[0].str' });
 
-    const actual = reverse(5, 'hi');
+    const actual = reverse(5, 'hi', new Date());
 
     test('#00 => equals "10:HI"', () => {
       expect(actual).toBe('10:HI');
