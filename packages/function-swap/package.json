@@ -1,6 +1,6 @@
 {
   "name": "@bemedev/function-swap",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A TypeScript utility that lets you remap a function's parameters by swapping their order or decomposing them into named keys — without changing the original function signature.",
   "type": "module",
   "main": "lib/index.js",

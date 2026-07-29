@@ -1,4 +1,4 @@
-import type { Decompose } from '@bemedev/decompose';
+import type { Decompose as __Decompose } from '@bemedev/decompose';
 
 export interface ObjectFromMap<T extends string> {
   [key: string]: ObjectFrom<T>;
@@ -10,13 +10,13 @@ export type AnyFunction = (...args: any[]) => any;
 
 type RemovePoint<T> = T extends `.${infer U}` ? U : never;
 
-type _Decompose<T> =
-  Decompose<T, { object: 'key'; key: '.' }> extends infer U
+export type Decompose<T> =
+  __Decompose<T, { object: 'key'; key: '.' }> extends infer U
     ? {
         [K in keyof U as RemovePoint<K & string>]: U[K];
       }
     : never;
-type _DecomposedKeys<T> = Extract<keyof _Decompose<T>, string>;
+export type DecomposedKeys<T> = Extract<keyof Decompose<T>, string>;
 
 // #region SubType
 type FilterFlags<Base, Condition> = {
@@ -35,17 +35,16 @@ export type SubType<Base extends object, Condition> = Pick<
 // #endregion
 
 export type DecomposeString2<T, Decomposed> =
-  _Decompose<T> extends infer U
+  Decompose<T> extends infer U
     ? {
         [K in keyof U]: AllowedNames<Decomposed, U[K]>;
       }
     : never;
 
-export type DecomposedKeys<F extends AnyFunction> = _DecomposedKeys<
-  Parameters<F>
->;
+export type DecomposedParameterKeys<F extends AnyFunction> =
+  DecomposedKeys<Parameters<F>>;
 
-export type DecomposedMap<F extends AnyFunction> = Decompose<
+export type DecomposedMap<F extends AnyFunction> = __Decompose<
   Parameters<F>
 >;
 
@@ -61,11 +60,11 @@ export type ResolveParamArray<P extends readonly any[], D> = {
 };
 
 export type FunctionSwapLevel2<F extends AnyFunction> = {
-  <const P extends readonly ObjectFrom<DecomposedKeys<F>>[]>(
+  <const P extends readonly ObjectFrom<DecomposedParameterKeys<F>>[]>(
     ...paramArray: P
   ): (...args: ResolveParamArray<P, DecomposedMap<F>>) => ReturnType<F>;
   constraint: <P extends readonly any[]>() => <
-    const P1 extends DecomposeString2<P, _Decompose<Parameters<F>>>,
+    const P1 extends DecomposeString2<P, Decompose<Parameters<F>>>,
   >(
     data: P1,
   ) => (...args: P) => ReturnType<F>;
@@ -76,11 +75,11 @@ export type FunctionSwap = <const F extends AnyFunction>(
 ) => FunctionSwapLevel2<F>;
 
 export type FunctionSwapParams = <P>() => <
-  const A extends readonly ObjectFrom<_DecomposedKeys<P>>[],
+  const A extends readonly ObjectFrom<DecomposedKeys<P>>[],
 >(
   ...args: A
 ) => <
-  const T extends (...args: ResolveParamArray<A, Decompose<P>>) => any,
+  const T extends (...args: ResolveParamArray<A, __Decompose<P>>) => any,
 >(
   fn: T,
 ) => T;

@@ -3,6 +3,20 @@
 <details>
 <summary>
 
+## **[0.2.2] - 29/07/2026** => _11:31_
+
+</summary>
+
+- **Refactor**: Export `Decompose` and `DecomposedKeys` type helpers, and rename parameter keys helper to `DecomposedParameterKeys`
+- <u>Test coverage **_100%_**</u>
+
+</details>
+
+<br/>
+
+<details>
+<summary>
+
 ## **[0.2.1] - 29/07/2026** => _11:15_
 
 </summary>
