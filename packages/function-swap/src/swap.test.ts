@@ -186,4 +186,31 @@ describe('TESTS', () => {
     const fn = () => reverse(5, 'hi', new Date());
     expect(fn).toThrow(STRING_UPPERCASE_ERROR);
   });
+
+  describe('#12 => Empty parameters function', () => {
+    describe('#01 => normal', () => {
+      test('#01 => without types', () => {
+        const swapped = swap(() => true)();
+        expect(swapped()).toBe(true);
+      });
+
+      test('#02 => with types', () => {
+        const swapped = swap((_data: boolean) => true)();
+        expect(swapped()).toBe(true);
+        expect((swapped as any)(false)).toBe(true);
+      });
+    });
+
+    describe('#02 => constraint', () => {
+      test('#01 => with types', () => {
+        const swapped = swap(() => true).constraint<[string]>()({});
+        expect(swapped('hi')).toBe(true);
+      });
+
+      test('#02 => without types', () => {
+        const swapped = swap(() => true).constraint()({});
+        expect(swapped()).toBe(true);
+      });
+    });
+  });
 });

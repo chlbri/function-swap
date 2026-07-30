@@ -3,6 +3,21 @@
 <details>
 <summary>
 
+## **[0.2.5] - 30/07/2026** => _01:41_
+
+</summary>
+
+- **Fix**: Handle zero-parameter and empty parameter mapping functions
+  gracefully in `swap` and `out.constraint`
+- <u>Test coverage **_100%_**</u>
+
+</details>
+
+<br/>
+
+<details>
+<summary>
+
 ## **[0.2.4] - 29/07/2026** => _12:33_
 
 </summary>

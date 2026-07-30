@@ -95,12 +95,32 @@ const swappedSubtract = swap(subtract).constraint<[number, number]>()({
 swappedSubtract(2, 10); // => 8 (10 - 2)
 ```
 
-> [!NOTE] `DecomposeString2` is **not partial** at runtime. Even though
+> [!NOTE] `DecomposeString` is **not partial** at runtime. Even though
 > TypeScript optional property syntax (`?`) allows omitting keys in the
 > constraint mapping object, all decomposed keys required by the target
 > function must be mapped. Omitting required keys will result in
 > `undefined` values during argument recomposition and will fail at runtime
 > if the target function expects them.
+
+### Zero-Parameter & Empty Mappings
+
+Functions without parameters or callers requiring empty mapping
+configurations are supported out of the box by `swap` and
+`swap(fn).constraint`:
+
+```ts
+import { swap } from '@bemedev/function-swap';
+
+const getStatus = () => 'active';
+
+// Direct swap for zero-parameter function
+const swappedStatus = swap(getStatus)();
+swappedStatus(); // => "active"
+
+// Empty constraint mapping for zero-parameter or ignored arguments
+const constrainedStatus = swap(getStatus).constraint<[string]>()({});
+constrainedStatus('ignored'); // => "active"
+```
 
 <br/>
 
@@ -144,7 +164,7 @@ signatures:
   matching type `Condition`.
 - **`SubType<Base, Condition>`**: Constructs a subtype of `Base` containing
   only properties matching type `Condition`.
-- **`DecomposeString2<T, Decomposed>`**: Maps decomposed target parameter
+- **`DecomposeString<T, Decomposed>`**: Maps decomposed target parameter
   key paths to matching source key paths. _Note: Not partial at runtime._
 
 <br/>

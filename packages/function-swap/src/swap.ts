@@ -10,6 +10,7 @@ const _swap: FunctionSwap = fn => {
   const out: any = (...map: any[]) => {
     return (...newArgs: any[]) => {
       const decomposedMap = buildMap(map, newArgs);
+      if (Object.keys(decomposedMap).length === 0) return fn();
       const recomposedArgs = recompose(decomposedMap) as any;
       return fn(...recomposedArgs);
     };
@@ -17,6 +18,7 @@ const _swap: FunctionSwap = fn => {
 
   out.constraint = () => (keysMatch: Record<string, string>) => {
     return (...newArgs: any[]) => {
+      if (Object.keys(keysMatch).length === 0) return fn();
       const decomposedMap: Record<string, any> = {};
 
       for (const [keyF, keyP] of Object.entries(keysMatch)) {
